@@ -4,12 +4,14 @@ A Python-based research data analysis project for **CSC 0315: Intelligent System
 
 ## Overview
 
-This project analyzes the factors associated with AI adoption among university students and evaluates the predictive performance of two machine learning approaches:
+This project investigates factors associated with AI adoption among university students and evaluates the predictive performance of two approaches:
 
 - **Multilayer Perceptron (MLP)** – A neural network with two hidden layers.
 - **Multiple Linear Regression (MLR)** – A statistical regression model used as a baseline.
 
-The models use six predictor variables to predict students' AI Adoption Scores.
+Both models use six predictor variables to predict students' AI Adoption Scores.
+
+The project uses Jupyter Notebooks (`.ipynb`) as its primary development and analysis environment. Each notebook contains its own code, explanations, tables, and visualizations. All cells are executed manually to allow step-by-step analysis and inspection of results.
 
 ## Research Variables
 
@@ -24,7 +26,7 @@ The study uses six independent variables:
 5. Accessibility
 6. Digital Literacy
 
-Each variable is measured using five Likert-scale survey items. The corresponding composite score is calculated using the mean of its five items.
+Each variable is measured using five Likert-scale survey items. A composite score is calculated using the mean of its five items.
 
 ### Target Variable
 
@@ -48,15 +50,17 @@ The resulting score ranges from 0 to 5.
 ```text
 ai-adoption-analysis/
 │
+├── notebooks/
+│   ├── 01_data_preprocessing.ipynb
+│   ├── 02_scoring.ipynb
+│   ├── 03_reliability_analysis.ipynb
+│   ├── 04_descriptive_analysis.ipynb
+│   ├── 05_mlp_model.ipynb
+│   ├── 06_regression_model.ipynb
+│   └── 07_model_evaluation.ipynb
+│
 ├── modules/
-│   ├── __init__.py
-│   ├── preprocessing.py
-│   ├── scoring.py
-│   ├── reliability.py
-│   ├── descriptive.py
-│   ├── mlp_model.py
-│   ├── regression_model.py
-│   └── evaluation.py
+│   └── __init__.py
 │
 ├── data/
 │   └── .gitkeep
@@ -65,26 +69,36 @@ ai-adoption-analysis/
 │   ├── graphs/
 │   └── .gitkeep
 │
-├── main.py
-├── config.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
+git
+## Notebook Guide
 
-## Analysis Modules
-
-| File | Responsibility |
+| Notebook | Purpose |
 |---|---|
-| `main.py` | Executes and coordinates the analysis pipeline. |
-| `config.py` | Stores project settings, column mappings, and model configurations. |
-| `preprocessing.py` | Validates, cleans, and prepares survey data. |
-| `scoring.py` | Performs reverse coding and calculates composite scores. |
-| `reliability.py` | Calculates Cronbach's alpha for the six predictor constructs. |
-| `descriptive.py` | Generates descriptive statistics and response distributions. |
-| `mlp_model.py` | Defines the Multilayer Perceptron model. |
-| `regression_model.py` | Defines the Multiple Linear Regression model and diagnostics. |
-| `evaluation.py` | Performs cross-validation, calculates evaluation metrics, and compares models. |
+| `01_data_preprocessing.ipynb` | Load, validate, clean, and prepare survey responses. |
+| `02_scoring.ipynb` | Reverse-code negatively worded items and calculate composite scores. |
+| `03_reliability_analysis.ipynb` | Calculate Cronbach's alpha for the six predictor constructs. |
+| `04_descriptive_analysis.ipynb` | Generate descriptive statistics and response distributions. |
+| `05_mlp_model.ipynb` | Build and train the two-hidden-layer MLP model. |
+| `06_regression_model.ipynb` | Build and evaluate the Multiple Linear Regression model. |
+| `07_model_evaluation.ipynb` | Compare MLP and MLR predictive performance. |
+
+### Notebook Execution
+
+Notebooks are executed manually in VS Code using the Jupyter extension.
+
+Each notebook is organized into individual cells containing code and Markdown explanations. This allows the researcher to:
+
+- Execute code one cell at a time.
+- Inspect intermediate outputs.
+- Review generated tables and visualizations.
+- Identify and correct errors before proceeding.
+- Document findings alongside the corresponding analysis.
+
+There is no central execution script. Each notebook is responsible for its respective research task.
 
 ## Research Questions and Analysis
 
@@ -98,16 +112,16 @@ The project addresses five research questions:
 
 ## Methodology
 
-The analysis follows this general workflow:
+The analysis follows this workflow:
 
 1. **Data Validation** – Check eligibility, consent, incomplete responses, duplicate entries, and invalid scale values.
-2. **Data Preprocessing** – Clean and prepare the survey responses.
+2. **Data Preprocessing** – Clean and prepare survey responses.
 3. **Reverse Coding** – Reverse-code negatively worded Trust and Accessibility items.
 4. **Composite Scoring** – Calculate the six predictor scores and AI Adoption Score.
 5. **Reliability Analysis** – Calculate Cronbach's alpha for each predictor construct.
 6. **Descriptive Analysis** – Calculate means, standard deviations, and response distributions.
 7. **Model Training** – Train the MLP and MLR models using the same six predictor variables.
-8. **Model Evaluation** – Apply repeated five-fold cross-validation.
+8. **Model Evaluation** – Apply repeated five-fold cross-validation using the same data splits and appropriate training-fold preprocessing.
 9. **Model Comparison** – Compare the models using their evaluation metrics.
 
 ### Evaluation Metrics
@@ -115,7 +129,7 @@ The analysis follows this general workflow:
 | Metric | Purpose | Preferred Result |
 |---|---|---|
 | RMSE | Measures prediction error while penalizing larger errors. | Lower |
-| MAE | Measures the average absolute prediction error. | Lower |
+| MAE | Measures average absolute prediction error. | Lower |
 | R² | Measures how well the model explains variation in the target variable. | Higher |
 
 Results will be interpreted as exploratory findings, considering the limitations of the available sample size.
@@ -123,7 +137,22 @@ Results will be interpreted as exploratory findings, considering the limitations
 ## Requirements
 
 - Python 3.10 or later
-- Required Python packages listed in `requirements.txt`
+- Visual Studio Code
+- Python extension for VS Code
+- Jupyter extension for VS Code
+
+### Python Libraries
+
+| Library | Purpose |
+|---|---|
+| Pandas | Data loading, cleaning, and manipulation. |
+| NumPy | Numerical computations. |
+| SciPy | Statistical calculations. |
+| Scikit-learn | Machine learning, cross-validation, preprocessing, and evaluation. |
+| Matplotlib | Data visualization. |
+| Seaborn | Statistical visualization. |
+| Jupyter | Notebook execution support. |
+| IPykernel | Python kernel for Jupyter notebooks. |
 
 ## Setup
 
@@ -152,6 +181,14 @@ py -m venv .venv
 pip install -r requirements.txt
 ```
 
+### 5. Configure VS Code
+
+1. Open the project folder in VS Code.
+2. Install the Python and Jupyter extensions.
+3. Open any notebook inside the `notebooks/` directory.
+4. Select the Python interpreter from the project's `.venv` environment.
+5. Select the corresponding Jupyter kernel.
+
 ## Dataset
 
 Place the Google Forms CSV export inside the `data/` directory.
@@ -161,19 +198,11 @@ data/
 └── survey_responses.csv
 ```
 
-**Data Privacy:** Raw survey data may contain personally identifiable information. Do not commit raw datasets, names, email addresses, or other confidential respondent information to the public repository. Only validated and anonymized data should be used for analysis.
-
-## Running the Project
-
-Once the analysis pipeline has been implemented:
-
-```cmd
-python main.py
-```
-
-Generated reports and visualizations will be stored in the `results/` directory.
+**Data Privacy:** Raw survey data may contain personally identifiable information. Do not commit raw datasets, names, email addresses, or other confidential respondent information to the repository. Only validated and anonymized data should be used for analysis.
 
 ## Expected Outputs
+
+Generated reports and visualizations will be stored in the `results/` directory.
 
 ```text
 results/
@@ -184,17 +213,10 @@ results/
 ├── model_comparison.csv
 │
 └── graphs/
+    ├── predictor_distributions.png
+    ├── adoption_distribution.png
+    └── model_comparison.png
 ```
 
-These outputs will contain the descriptive statistics, reliability results, model evaluation metrics, model comparison, and relevant visualizations.
+These are planned outputs and will be generated as the corresponding notebooks are implemented.
 
-## Project Status
-
-<em>Under Development</em>
-
-The project structure and analysis modules are being developed incrementally. Final results will be added after data processing, model training, and evaluation are completed.
-
----
-
-**Course:** CSC 0315 – Intelligent System  
-**Institution:** Pamantasan ng Lungsod ng Maynila (PLM)
