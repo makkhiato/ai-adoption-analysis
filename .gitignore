@@ -22,12 +22,3 @@ desktop.ini
 
 # Jupyter
 .ipynb_checkpoints/
-
-# Research data (privacy)
-data/*.csv
-data/raw/*
-!data/raw/.gitkeep
-
-# Generated outputs
-results/*
-!results/.gitkeep
