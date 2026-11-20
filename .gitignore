@@ -24,6 +24,7 @@ desktop.ini
 .ipynb_checkpoints/
 
 # Research data (privacy)
+data/*.csv
 data/raw/*
 !data/raw/.gitkeep
 
